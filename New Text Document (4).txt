@@ -1,0 +1,410 @@
+package com.cg.collegedetails.ui;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
+
+import com.cg.studentdetails.dto.StudentDto;
+import com.cg.studentdetails.service.IStudentService;
+import com.cg.studentdetails.service.StudentServiceImpl;
+import com.cg.studentstatus.exception.IStudentExceptionMessages;
+
+import com.cg.studentstatus.exception.StudentException;
+
+public class StudentMain {
+
+	public static void main(String[] args) {
+		Scanner scanner=new Scanner(System.in);
+		IStudentService service=new StudentServiceImpl();
+		
+		int choice=0;
+		do {
+			printDetails();
+			System.out.println("enter the choice");
+			choice=scanner.nextInt();
+			switch(choice) {
+			case 1:
+				System.out.println("id is auto generated");
+				System.out.println("enter employee name");
+				String name=scanner.next();
+				System.out.println("enter employee phone");
+				String phone=scanner.next();
+				System.out.println("enter employee email");
+				String email=scanner.next();
+				System.out.println("enter employee age");
+				int age=scanner.nextInt();
+				System.out.println("enter employee gender");
+				String gender=scanner.next();
+				System.out.println("enter employee city");
+				String city=scanner.next();
+				System.out.println("enter student date of joining in dd-mmm-yyyy");
+				String sc=scanner.next();
+				try {
+				DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+				LocalDate sdob=LocalDate.parse(sc,dateTimeFormatter);
+				
+				StudentDto studentDto=new StudentDto();
+				studentDto.setSname(name);
+				studentDto.setSphone(phone);
+				studentDto.setSemail(email);
+				studentDto.setSage(age);
+				studentDto.setSgender(gender);
+				studentDto.setScity(city);
+				studentDto.setDate(sdob);
+				
+				boolean result=false;
+				try {
+					result=service.validationDetails(studentDto);
+				}catch(StudentException stException) {
+					System.out.println(stException.getMessage());
+				}
+		
+				if(result) {
+					int id=service.addStudent(studentDto);
+					System.out.println(id);
+				}
+				}catch(DateTimeParseException exception) {
+					try {
+						throw new StudentException(IStudentExceptionMessages.MESSAGE5);
+					}catch(StudentException studentException) {
+						System.out.println(studentException.getMessage());
+					}
+				}
+				break;
+			case 2:
+				System.out.println("Enter id");
+				int id=scanner.nextInt();
+				StudentDto dto=service.showStudent(id);
+				if(dto!=null) {
+					System.out.println("student name"+dto.getSname());
+					System.out.println("ststus"+dto.getSstatus());
+					System.out.println("college"+dto.getCollegeName());
+				}else {
+					System.out.println("student not found ");
+				}
+				break;
+				
+			case 3:
+				System.exit(0);
+				break;
+			default:
+				break;
+			}	
+			}while(choice!=4);
+		scanner.close();
+	}
+	private static void printDetails() {
+		System.out.println("\n MENU");
+		System.out.println("-------------");
+		System.out.println("\n  1. add student details  2.view student details    3.exit");
+	}
+}
+
+
+
+
+
+
+package com.cg.studentdetails.dao;
+
+import java.util.HashMap;
+
+import com.cg.studentdetails.dto.StudentDto;
+import com.cg.studentstatus.exception.StudentException;
+
+public interface IStudentDao {
+
+	
+	public String showCollegeName(String city);
+	public StudentDto showStudent(int id);
+	void addStudent(StudentDto studentDto);
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+package com.cg.studentdetails.dao;
+
+import java.util.HashMap;
+import java.util.regex.Pattern;
+
+import com.cg.studentdetails.dto.StudentDto;
+
+import com.cg.studentstatus.exception.StudentException;
+
+public class StudentDaoImpl implements IStudentDao { 
+	
+	private static HashMap<String,String>collegedetails=null;
+	private static HashMap<Integer,StudentDto>studentdetails=null;
+	
+	static {
+		collegedetails=new HashMap<>();
+		studentdetails=new HashMap<>();
+		collegedetails.put("Delhi", "IIT-D");
+		collegedetails.put("Hyd","IIT-H");
+		collegedetails.put("Chennai","IIT-M");
+		collegedetails.put("Bangalore","IISc-B");
+		collegedetails.put("Mumbai","IIT-M");
+	}
+
+	@Override
+	public void addStudent(StudentDto studentDto) {
+	studentdetails.put(studentDto.getSid(), studentDto);	
+	}
+
+	@Override
+	public String showCollegeName(String city) {
+		
+		return collegedetails.get(city);
+	}
+
+	@Override
+	public StudentDto showStudent(int id) {
+		
+		return studentdetails.get(id);
+	}
+	
+	
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+public class StudentDto { 
+	
+private int sid;
+private String sname;
+private String sphone;
+private String semail;
+private int sage;
+private String sgender;
+private String scity;
+private LocalDate Date;
+private String sstatus="Not approved";
+private String CollegeName;
+public int getSid() {
+	return sid;
+}
+public void setSid(int sid) {
+	this.sid = sid;
+}
+public String getSname() {
+	return sname;
+}
+public void setSname(String sname) {
+	this.sname = sname;
+}
+public String getSphone() {
+	return sphone;
+}
+public void setSphone(String sphone) {
+	this.sphone = sphone;
+}
+public String getSemail() {
+	return semail;
+}
+public void setSemail(String semail) {
+	this.semail = semail;
+}
+public int getSage() {
+	return sage;
+}
+public void setSage(int sage) {
+	this.sage = sage;
+}
+public String getSgender() {
+	return sgender;
+}
+public void setSgender(String sgender) {
+	this.sgender = sgender;
+}
+public String getScity() {
+	return scity;
+}
+public void setScity(String scity) {
+	this.scity = scity;
+}
+public LocalDate getDate() {
+	return Date;
+}
+public void setDate(LocalDate date) {
+	Date = date;
+}
+public String getSstatus() {
+	return sstatus;
+}
+public void setSstatus(String sstatus) {
+	this.sstatus = sstatus;
+}
+public String getCollegeName() {
+	return CollegeName;
+}
+public void setCollegeName(String collegeName) {
+	CollegeName = collegeName;
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+package com.cg.studentdetails.service;
+
+import com.cg.studentdetails.dto.StudentDto;
+import com.cg.studentstatus.exception.StudentException;
+
+public interface IStudentService {
+	public Integer addStudent(StudentDto studentDto);
+	public boolean validationDetails(StudentDto studentDto)throws StudentException;
+	public StudentDto showStudent(int id);
+	
+	
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package com.cg.studentdetails.service;
+
+
+
+import com.cg.studentdetails.dao.IStudentDao;
+import com.cg.studentdetails.dao.StudentDaoImpl;
+import com.cg.studentdetails.dto.StudentDto;
+import com.cg.studentstatus.exception.IStudentExceptionMessages;
+import com.cg.studentstatus.exception.StudentException;
+
+public class StudentServiceImpl implements  IStudentService {
+private StudentDaoImpl dao=null;
+
+public StudentServiceImpl() {
+	dao=new StudentDaoImpl();
+}
+
+@Override
+public Integer addStudent(StudentDto studentDto) {
+	int generatedId=(int)(Math.abs(Math.random()*10000));
+	String collegeName=dao.showCollegeName(studentDto.getScity());
+	if(null!=collegeName) {
+		studentDto.setSid(generatedId);
+		studentDto.setCollegeName(collegeName);
+		studentDto.setSstatus("Approved");
+		dao.addStudent(studentDto);		
+	}
+	
+	
+	return generatedId;
+}
+
+@Override
+public boolean validationDetails(StudentDto studentDto) throws StudentException {
+	boolean result=true;
+	if(!(studentDto.getSname().matches("[A-Za-z]+"))) {
+		throw new StudentException(IStudentExceptionMessages.MESSAGE1);
+		
+	}if(!(studentDto.getSphone().matches("\\d{10}"))&& (studentDto.getSphone().length()==10) ) {
+		throw new StudentException(IStudentExceptionMessages.MESSAGE2);
+		
+	}if(studentDto.getSage()<1 || studentDto.getSage()>100){
+		throw new StudentException(IStudentExceptionMessages.MESSAGE3);
+		
+	}if(!(studentDto.getSemail().matches("[a-zA-Z0-9_.]*@[a-z0-9]*.com"))) {
+		throw new StudentException(IStudentExceptionMessages.MESSAGE4);
+	}
+		
+	return result;
+}
+
+@Override
+public StudentDto showStudent(int id) {
+	
+	return dao.showStudent(id);
+}
+
+
+}
+
+
+
+
+package com.cg.studentstatus.exception;
+
+public interface IStudentExceptionMessages {
+	String MESSAGE1="Name should be only alphabets";
+	String MESSAGE2="phone number should be only numbers and of 10 digits only";
+	String MESSAGE3="age should be between 1 to 100";
+	String MESSAGE4="email should be valid";
+	String MESSAGE5="please enter date of joining correctly";
+}
+
+
+
+
+
+
+
+
+
+
+
+package com.cg.studentstatus.exception;
+
+public class StudentException extends Exception{
+
+	public StudentException() {
+		super();
+	}
+	public StudentException(String msg) {
+		System.out.println(msg);
+	}
+}
+
+
+
+
+
+
+
+
+
