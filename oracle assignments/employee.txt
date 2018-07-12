@@ -1,0 +1,51 @@
+CREATE TABLE employee_152637
+(
+	eid int,
+	Ename varchar2(15),
+	age int
+);
+CREATE TABLE address_152637
+(
+	Eid int,
+	city varchar2(15),
+	state varchar2(15)
+);
+
+Insert into employee_152637 values (1,'rajiv',30);
+Insert into employee_152637 values (2,'kiran',30);
+Insert into employee_152637 values (3,'bharath',30);
+Insert into employee_152637 values (4,'shankar',30);
+
+Insert into address_152637 values (1,'hyderabad','telangana');
+Insert into address_152637 values (2,'Amaravati','Ap');
+Insert into address_152637 values (3,'chennai','TN');
+
+//join or inner join
+
+select e.eid,ename,city,state from Employee_152637 e join address_152637 a on e.eid=a.eid;
+
+Insert into address_152637 values(5,'','kolkata','WB');
+
+
+select e.eid,ename,city,state from Employee_152637 e right outer join address_152637 a on e.eid=a.eid;
+
+
+//cartesian product
+
+create table students_152637
+(
+	sname_152637 varchar2(10)
+);
+create table subjects_152637
+(
+	subname_152637 varchar2(20)
+);
+
+Insert into students_152637 values ('Rajiv');
+Insert into students_152637 values ('kiran');
+Insert into students_152637 values ('shankar');
+
+Insert into subjects_152637 values ('English');
+Insert into subjects_152637 values ('maths');
+
+select sname_152637,subname_152637 from students1 cross join subjects1;

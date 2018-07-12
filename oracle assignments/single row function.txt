@@ -1,0 +1,68 @@
+SQL> select power (2,3) from dual;
+
+POWER(2,3)
+----------
+         8
+
+SQL> select round(2.456,2) from dual;
+
+ROUND(2.456,2)
+--------------
+          2.46
+
+SQL> select floor(4.67), from dual;
+select floor(4.67), from dual
+                    *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select floor(4.67) from dual;
+
+FLOOR(4.67)
+-----------
+          4
+
+SQL> select abs(-10) from dual;
+
+  ABS(-10)
+----------
+        10
+
+SQL> select sqrt(25) from dual;
+
+  SQRT(25)
+----------
+         5
+
+SQL> select(-5) from dual;
+
+      (-5)
+----------
+        -5
+
+SQL> select mod(25,3) from dual;
+
+ MOD(25,3)
+----------
+         1
+
+SQL> select ceil(10) from dual;
+
+  CEIL(10)
+----------
+        10
+
+SQL> select trunc(10.98998) from dual;
+
+TRUNC(10.98998)
+---------------
+             10
+
+SQL> select floor(2.546) from dual;
+
+FLOOR(2.546)
+------------
+           2
+
+SQL>
