@@ -1,0 +1,3 @@
+create view myquery
+as
+select * from employee99 where department="It" order by salary;

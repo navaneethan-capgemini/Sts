@@ -1,0 +1,178 @@
+create table employee99
+(
+	Id int,
+	name varchar2(20),
+	department varchar2(10),
+	salary int
+);
+
+insert into employee99 values(1,'rajiv','It',54000);
+insert into employee99 values(2,'kiran','admin',34000);
+insert into employee99 values(3,'bharath','It',60000);
+insert into employee99 values(4,'shankar','sales',84000);
+insert into employee99 values(5,'subash','admin',24000);
+insert into employee99 values(6,'bhaskar','sales',94000);
+
+
+select * from employee99;
+
+select * from employee99 where department IN('IT','Sales');
+
+select * from employee99 where department ='IT' or department='sales';
+
+select * from employee99 where salary>60000;
+
+select distinct department from employee99;
+
+select department,AVG(salary) FROM employee99 group by department;
+
+select department,AVG(salary) FROM employee99 group by department having AVG(salary)>50000;
+
+
+select * from employee99;
+
+1.write query to print employee details with highest salary;
+
+bhaskar 94000
+
+2.write query to print employee details with second highest salary;
+
+shankar 84000
+ 
+
+Answer:
+
+SELECT Name, Salary FROM employee99
+WHERE Salary = (SELECT Max(Salary) FROM employee99)
+
+
+select name, salary from employee99 where salary=(select MAX(salary) from employee99 where salary<(select MAX(salary) from employee99)); 
+
+create table employee98
+(
+	id int primary key,
+	name varchar2(20),
+	age int check(age>14),
+	emailId varchar2(20) unique,
+	company varchar2(20) default('capgemini')
+);
+
+insert into employee98 values(1,'rajiv',22,'test@test.com','capgemini');
+insert into employee98(id,name, age,emailid) values(2,'kiran',23,'test@test.com');
+
+error:unique constraint not allowed
+
+
+insert into employee98(id,name, age,emailid) values(2,'kiran',23,null);
+
+
+insert into employee98(id,name,age,emailid) values(3,'kiran',12,'test@test2.com');
+	
+error : 
+
+insert into employee98(id,name,age) values(3,'abc',null);
+
+
+
+
+
+
+
+
+
+
+
+
+
+============================================
+
+
+create table customer
+(
+	cid int primary key,
+	cname varchar2(10)
+);
+
+create table orders
+(
+	oid int primary key,
+	cid int references customer(cid),
+	oprice int
+);
+
+
+insert into customer values (1001,'rajiv');
+
+insert into orders values (5001,2001,24000);
+
+
+
+select * from customer;
+select * from orders;
+
+
+delete from customers where 1001;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==========================
+
+
+
+
+
+create table Itemployee99 as select Id,name,department,salary from employee99 where department='It';
+
+
+/*add column emailID varchar2(20) to employee99 */
+
+alter table Employee99 add(emailid varchar2(20));
+
+
+
+
+alter table employee99 modify emailid varchar(25);
+
+desc employee99;
+
+alter table employee99 drop column emailid;
+
+
+
+
+
+//constraint names..
+
+
+
+create table products
+(
+	fid int constraint fid_fk primary key,
+	pname varchar2(20) constraint pname_uk unique 
+);
+
+ALTER TABLE PRODUCTS RENAME COLUMN PNAME TO PRODUCTNAME;
+DESC PRODUCTS;
+
+

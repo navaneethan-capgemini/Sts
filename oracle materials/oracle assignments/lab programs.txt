@@ -1,0 +1,191 @@
+1.1
+
+select staff_name as name,design_code as designation_code from staff_master where hiredate<'01-JAN-2003' and staff_sal between 12000 and 25000;
+
+1.2
+
+
+SELECT staff_code,staff_name,dept_code FROM staff_master where EXTRACT(year from sysdate)-EXTRACT(year from hiredate)>=15 ORDER BY HIREDATE; 
+
+
+SQL> SELECT staff_code,staff_name,dept_code FROM staff_master where EXTRACT(year
+ from sysdate)-EXTRACT(year from hiredate)>=15 ORDER BY HIREDATE;
+
+STAFF_CODE STAFF_NAME                                          DEPT_CODE
+---------- -------------------------------------------------- ----------
+    100005 John                                                       10
+    100004 Anil                                                       20
+    100006 Allen                                                      30
+    100010 Ram                                                        30
+    100003 Mohan                                                      10
+    100002 Shyam                                                      20
+    100007 Smith                                                      20
+    100008 Raviraj                                                    40
+    100001 Arvind                                                     30
+    100009 Rahul                                                      20
+
+
+1.3
+
+select * from staff_master where mgr_code is null;
+
+no rows selected
+
+
+1.4
+
+
+SQL> select * from book_master where book_pub_year between 2001 AND 2004 OR book
+_name like '%&';
+
+ BOOK_CODE BOOK_NAME                                          BOOK_PUB_YEAR
+---------- -------------------------------------------------- -------------
+BOOK_PUB_AUTHOR
+--------------------------------------------------
+  10000003 JAVA Complete Reference                                     2004
+H.Schild
+
+  10000007 Intoduction To Algorithams                                  2001
+Cormen
+
+  10000009 Introduction to O/S                                         2001
+Millan
+
+
+1.5
+
+
+
+SQL> select staff_name from staff_master where staff_name like '%A%';
+
+STAFF_NAME
+--------------------------------------------------
+Arvind
+Anil
+Allen
+
+
+2.1
+
+
+
+SQL> select staff_name,lpad(staff_sal,15,'$') from staff_master;
+
+STAFF_NAME
+--------------------------------------------------
+LPAD(STAFF_SAL,15,'$')
+------------------------------------------------------------
+Arvind
+$$$$$$$$$$17000
+
+Shyam
+$$$$$$$$$$20000
+
+Mohan
+$$$$$$$$$$24000
+
+
+STAFF_NAME
+--------------------------------------------------
+LPAD(STAFF_SAL,15,'$')
+------------------------------------------------------------
+Anil
+$$$$$$$$$$20000
+
+John
+$$$$$$$$$$32000
+
+Allen
+$$$$$$$$$$42000
+
+
+STAFF_NAME
+--------------------------------------------------
+LPAD(STAFF_SAL,15,'$')
+------------------------------------------------------------
+Smith
+$$$$$$$$$$62000
+
+Raviraj
+$$$$$$$$$$18000
+
+Rahul
+$$$$$$$$$$22000
+
+
+STAFF_NAME
+--------------------------------------------------
+LPAD(STAFF_SAL,15,'$')
+------------------------------------------------------------
+Ram
+$$$$$$$$$$32000
+
+
+10 rows selected.
+
+
+
+SQL> SELECT STUDENT_NAME AS NAME,TO_CHAR(STUDENT_DOB,'MONTH DD YYYY') AS DOB FRO
+M STUDENT_MASTER  WHERE TO_CHAR(STUDENT_DOB,'DAY') LIKE '%SATURDAY%'
+  2  OR TO_CHAR(STUDENT_DOB,'DAY') LIKE '%SUNDAY%' ;
+
+NAME
+--------------------------------------------------
+DOB
+--------------------------------------------
+Ravi
+NOVEMBER  01 1981
+
+Raj
+JANUARY   14 1979
+
+Arvind
+JANUARY   15 1983
+
+
+NAME
+--------------------------------------------------
+DOB
+--------------------------------------------
+Mehul
+JANUARY   17 1982
+
+Vijay
+JANUARY   19 1980
+
+Rajat
+JANUARY   20 1980
+
+
+NAME
+--------------------------------------------------
+DOB
+--------------------------------------------
+Ramesh
+DECEMBER  27 1980
+
+Amit Raj
+SEPTEMBER 28 1980
+
+
+8 rows selected.
+
+SQL>
+
+SQL> select STAFF_NAME,ROUND(EXTRACT(YEAR FROM sysdate)-EXTRACT(YEAR FROM HIREDA
+TE)) AS "Months_Worked" from STAFF_MASTER ORDER BY HIREDATE;
+
+STAFF_NAME                                         Months_Worked
+-------------------------------------------------- -------------
+John                                                          17
+Anil                                                          17
+Allen                                                         17
+Ram                                                           16
+Mohan                                                         16
+Shyam                                                         16
+Smith                                                         16
+Raviraj                                                       15
+Arvind                                                        15
+Rahul                                                         15
+
+10 rows selected.

@@ -1,0 +1,22 @@
+
+
+
+primary key
+=======================
+
+
+
+1.A table can have only one primary key
+2.Primary key is used to muniquely identify a particular record.
+3.primary key will not allow null values.
+4.primary key will not allow duplicate values.
+5.A primary key formed with combinarion of multiple columns is called composite primary key.
+
+
+
+Unique key
+=======================
+
+1.A table can have more than one unique keys.
+2.unique key will allow null values.
+3.unique key will not allow duplicate values.

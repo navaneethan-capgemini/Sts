@@ -1,0 +1,491 @@
+SQL> select staff_code,staff_name from staff_master where staff_dob between '01-
+JAN-1980'And '31-JAN-1980';
+
+STAFF_CODE STAFF_NAME
+---------- --------------------------------------------------
+    100001 Arvind
+    100006 Allen
+
+SQL> select book_code,book_name from book_master where book_pub_author like '%Ka
+netkar%';
+
+ BOOK_CODE BOOK_NAME
+---------- --------------------------------------------------
+  10000001 Let Us C++
+  10000006 Let Us C
+
+SQL> select staff_code,staff_name,staff_sal from staff_master where dept_code =1
+0 and staff_dob>'01-JAN-1945';
+
+STAFF_CODE STAFF_NAME                                          STAFF_SAL
+---------- -------------------------------------------------- ----------
+    100003 Mohan                                                   24000
+    100005 John                                                    32000
+
+
+SQL> SELECT book_code FROM book_master WHERE book_pub_author LIKE '%Kanetkar%' O
+R book_name LIKE '%Pointers%';
+
+ BOOK_CODE
+----------
+  10000001
+  10000006
+
+SQL> Select staff_code,staff_name FROM staff_master where dept_code NOT IN(10,20
+);
+
+STAFF_CODE STAFF_NAME
+---------- --------------------------------------------------
+    100001 Arvind
+    100006 Allen
+    100008 Raviraj
+    100010 Ram
+
+SQL> select dept_code FROM department_master WHERE dept_name IN ('Computer Scien
+ce' , 'Mechanics');
+
+ DEPT_CODE
+----------
+        10
+        40
+
+
+SQL> select power (2,3) from dual;
+
+POWER(2,3)
+----------
+         8
+
+SQL> select round(2.456,2) from dual;
+
+ROUND(2.456,2)
+--------------
+          2.46
+
+SQL> select floor(4.67), from dual;
+select floor(4.67), from dual
+                    *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select floor(4.67) from dual;
+
+FLOOR(4.67)
+-----------
+          4
+
+SQL> select abs(-10) from dual;
+
+  ABS(-10)
+----------
+        10
+
+SQL> select sqrt(25) from dual;
+
+  SQRT(25)
+----------
+         5
+
+SQL> select(-5) from dual;
+
+      (-5)
+----------
+        -5
+
+SQL> select mod(25,3) from dual;
+
+ MOD(25,3)
+----------
+         1
+
+SQL> select ceil(10) from dual;
+
+  CEIL(10)
+----------
+        10
+
+SQL> select trunc(10.98998) from dual;
+
+TRUNC(10.98998)
+---------------
+             10
+
+SQL> select floor(2.546) from dual;
+
+FLOOR(2.546)
+------------
+           2
+
+SQL>SQL> select sign(10) from dual;
+
+  SIGN(10)
+----------
+         1
+
+SQL> select lower(NAV) FROM DUAL;
+select lower(NAV) FROM DUAL
+             *
+ERROR at line 1:
+ORA-00904: "NAV": invalid identifier
+
+
+SQL> select lower(NAV) FROM dual;
+select lower(NAV) FROM dual
+             *
+ERROR at line 1:
+ORA-00904: "NAV": invalid identifier
+
+
+SQL> select lower(NAV) FROM dual;
+select lower(NAV) FROM dual
+             *
+ERROR at line 1:
+ORA-00904: "NAV": invalid identifier
+
+
+SQL> select lower('NAV') FROM dual;
+
+LOW
+---
+nav
+
+SQL> SELECT upper('lower') from dual;
+
+UPPER
+-----
+LOWER
+
+SQL> select length('hello') from dual;
+
+LENGTH('HELLO')
+---------------
+              5
+
+SQL> select initcap(hello) from dual;
+select initcap(hello) from dual
+               *
+ERROR at line 1:
+ORA-00904: "HELLO": invalid identifier
+
+
+SQL> select initcap('hello') from dual;
+
+INITC
+-----
+Hello
+
+SQL> select concat('hello','world') from dual;
+
+CONCAT('HE
+----------
+helloworld
+
+SQL> select substr('hello',1,4) from dual;
+
+SUBS
+----
+hell
+
+SQL> select ltrim('hello') from dual;
+
+LTRIM
+-----
+hello
+
+SQL> select rtrim('hello  ') from dual;
+
+RTRIM
+-----
+hello
+
+SQL> replace('hello','e','a') from dual;
+SP2-0734: unknown command beginning "replace('h..." - r
+SQL> select replace ('welcome to java','java','sql') fr
+
+REPLACE('WELCO
+--------------
+welcome to sql
+
+SQL> select lpad('hello',3,'n') from dual;
+
+LPA
+---
+hel
+
+SQL> select rpad('hello boys',4,'a') from dual;
+
+RPAD
+----
+hell
+
+SQL> select instr('lionel messi','e')from dual;
+
+INSTR('LIONELMESSI','E')
+------------------------
+                       5
+
+SQL> select rpad('hello',20,'nav') from dual;
+
+RPAD('HELLO',20,'NAV
+--------------------
+hellonavnavnavnavnav
+
+SQL> select substr('messi',1,3) from dual;
+
+SUB
+---
+mes
+
+SQL> select add-months(sysdate,10) from dual;
+select add-months(sysdate,10) from dual
+       *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select ADD_MONTHS (sysdate,10) from dual;
+
+ADD_MONTH
+---------
+12-MAY-19
+
+SQL>
+SQL> select Student_dob,round((sysdate-student_dob)/365) asage from student_mast
+er;
+
+STUDENT_D      ASAGE
+--------- ----------
+11-JAN-80         39
+01-NOV-81         37
+13-JAN-82         37
+14-JAN-79         40
+15-JAN-83         36
+16-JAN-81         38
+17-JAN-82         37
+11-MAR-81         37
+19-JAN-80         39
+20-JAN-80         39
+21-JAN-80         39
+
+STUDENT_D      ASAGE
+--------- ----------
+22-JAN-80         38
+23-JAN-80         38
+15-FEB-85         33
+18-MAR-81         37
+26-NOV-80         38
+27-DEC-80         38
+28-SEP-80         38
+29-MAY-81         37
+11-NOV-80         38
+01-JAN-80         39
+
+21 rows selected.
+
+SQL> select Student_dob,round((sysdate-student_dob)/365) AS age from student_mas
+ter;
+
+STUDENT_D        AGE
+--------- ----------
+11-JAN-80         39
+01-NOV-81         37
+13-JAN-82         37
+14-JAN-79         40
+15-JAN-83         36
+16-JAN-81         38
+17-JAN-82         37
+11-MAR-81         37
+19-JAN-80         39
+20-JAN-80         39
+21-JAN-80         39
+
+STUDENT_D        AGE
+--------- ----------
+22-JAN-80         38
+23-JAN-80         38
+15-FEB-85         33
+18-MAR-81         37
+26-NOV-80         38
+27-DEC-80         38
+28-SEP-80         38
+29-MAY-81         37
+11-NOV-80         38
+01-JAN-80         39
+
+21 rows selected.
+
+SQL> select STUDENT_DOB,EXTRACT(YEAR FROM SYSDATE)AS AGE FROM student_master;
+
+STUDENT_D        AGE
+--------- ----------
+11-JAN-80       2018
+01-NOV-81       2018
+13-JAN-82       2018
+14-JAN-79       2018
+15-JAN-83       2018
+16-JAN-81       2018
+17-JAN-82       2018
+11-MAR-81       2018
+19-JAN-80       2018
+20-JAN-80       2018
+21-JAN-80       2018
+
+STUDENT_D        AGE
+--------- ----------
+22-JAN-80       2018
+23-JAN-80       2018
+15-FEB-85       2018
+18-MAR-81       2018
+26-NOV-80       2018
+27-DEC-80       2018
+28-SEP-80       2018
+29-MAY-81       2018
+11-NOV-80       2018
+01-JAN-80       2018
+
+21 rows selected.
+
+SQL> select STUDENT_DOB,EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM STUDENT_D
+OB) AS AGE FROM student_master;
+
+STUDENT_D        AGE
+--------- ----------
+11-JAN-80         38
+01-NOV-81         37
+13-JAN-82         36
+14-JAN-79         39
+15-JAN-83         35
+16-JAN-81         37
+17-JAN-82         36
+11-MAR-81         37
+19-JAN-80         38
+20-JAN-80         38
+21-JAN-80         38
+
+STUDENT_D        AGE
+--------- ----------
+22-JAN-80         38
+23-JAN-80         38
+15-FEB-85         33
+18-MAR-81         37
+26-NOV-80         38
+27-DEC-80         38
+28-SEP-80         38
+29-MAY-81         37
+11-NOV-80         38
+01-JAN-80         38
+
+21 rows selected.
+
+SQL>SQL> select student_code,student_Name,NVL(Student_address,'not-filled')from stud
+ent_master;
+
+STUDENT_CODE STUDENT_NAME
+------------ --------------------------------------------------
+NVL(STUDENT_ADDRESS,'NOT-FILLED')
+--------------------------------------------------------------------------------
+
+        1001 Amit
+chennai
+
+        1002 Ravi
+New Delhi
+
+        1003 Ajay
+not-filled
+
+
+STUDENT_CODE STUDENT_NAME
+------------ --------------------------------------------------
+NVL(STUDENT_ADDRESS,'NOT-FILLED')
+--------------------------------------------------------------------------------
+
+        1004 Raj
+Mumbai
+
+        1005 Arvind
+Bangalore
+
+        1006 Rahul
+Delhi
+
+
+STUDENT_CODE STUDENT_NAME
+------------ --------------------------------------------------
+NVL(STUDENT_ADDRESS,'NOT-FILLED')
+--------------------------------------------------------------------------------
+
+        1007 Mehul
+Chennai
+
+        1008 Dev
+Bangalore
+
+        1009 Vijay
+Bangalore
+
+
+STUDENT_CODE STUDENT_NAME
+------------ --------------------------------------------------
+NVL(STUDENT_ADDRESS,'NOT-FILLED')
+--------------------------------------------------------------------------------
+
+        1010 Rajat
+Bangalore
+
+        1011 Sunder
+Chennai
+
+        1012 Rajesh
+not-filled
+
+
+STUDENT_CODE STUDENT_NAME
+------------ --------------------------------------------------
+NVL(STUDENT_ADDRESS,'NOT-FILLED')
+--------------------------------------------------------------------------------
+
+        1013 Anil
+Chennai
+
+        1014 Sunil
+not-filled
+
+        1015 Kapil
+Mumbai
+
+
+STUDENT_CODE STUDENT_NAME
+------------ --------------------------------------------------
+NVL(STUDENT_ADDRESS,'NOT-FILLED')
+--------------------------------------------------------------------------------
+
+        1016 Ashok
+not-filled
+
+        1017 Ramesh
+not-filled
+
+        1018 Amit Raj
+New Delhi
+
+
+STUDENT_CODE STUDENT_NAME
+------------ --------------------------------------------------
+NVL(STUDENT_ADDRESS,'NOT-FILLED')
+--------------------------------------------------------------------------------
+
+        1019 Ravi Raj
+New Delhi
+
+        1020 Amrit
+not-filled
+
+        1021 Sumit
+Chennai
+
+
+21 rows selected.
+
+SQL>

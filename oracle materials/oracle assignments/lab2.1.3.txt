@@ -1,0 +1,20 @@
+
+3.	Display each Staff name and number of months they worked for the organization. Label the column as ‘Months Worked’. Order your result by number of months employed. Also Round the number of months to closest whole number.
+
+SQL> select STAFF_NAME,ROUND(EXTRACT(YEAR FROM sysdate)-EXTRACT(YEAR FROM HIREDATE)) AS "Months_Worked" from STAFF_MASTER ORDER BY HIREDATE;
+
+
+STAFF_NAME                                         Months_Worked
+-------------------------------------------------- -------------
+John                                                          17
+Anil                                                          17
+Allen                                                         17
+Ram                                                           16
+Mohan                                                         16
+Shyam                                                         16
+Smith                                                         16
+Raviraj                                                       15
+Arvind                                                        15
+Rahul                                                         15
+
+10 rows selected. 

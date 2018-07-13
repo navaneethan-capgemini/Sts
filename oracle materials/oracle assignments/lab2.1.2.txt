@@ -1,0 +1,17 @@
+2.	Display name and date of birth of students where date of birth must be displayed in the format similar to “January, 12 1981” for those who were born on Saturday or Sunday.
+
+SQL>SELECT STUDENT_NAME AS NAME,TO_CHAR(STUDENT_DOB,'MONTH DD YYYY') AS DOB FROM STUDENT_MASTER  WHERE TO_CHAR(STUDENT_DOB,'DAY') LIKE '%SATURDAY%' 
+OR TO_CHAR(STUDENT_DOB,'DAY') LIKE '%SUNDAY%' ;
+
+NAME                                               DOB                                         
+-------------------------------------------------- --------------------------------------------
+Ravi                                               NOVEMBER  01 1981                           
+Raj                                                JANUARY   14 1979                           
+Arvind                                             JANUARY   15 1983                           
+Mehul                                              JANUARY   17 1982                           
+Vijay                                              JANUARY   19 1980                           
+Rajat                                              JANUARY   20 1980                           
+Ramesh                                             DECEMBER  27 1980                           
+Amit Raj                                           SEPTEMBER 28 1980                           
+
+8 rows selected. 
